@@ -1,11 +1,11 @@
 from setuptools import setup
 
-setup(name='WikiPyEmail',
-      version='0.1',
-      description='Send an email from WikiPy.',
+setup(name='WikiPy',
+      version='1.0',
+      description='Send emails and convert markdown files to PDFs with pandoc from WikiPy.',
       url='https://github.com/TommyArnzen1/WikiPyEmail',
       author='WikiPy',
       author_email='arnzent1@mymail.nku.edu',
       license='MIT',
-      packages=['WikiPyEmail'],
+      packages=['WikiPy'],
       zip_safe=False)

@@ -6,9 +6,15 @@ from email.mime.multipart import MIMEMultipart
 from email import encoders
 import os
 
-def send_email(url, email_addresses):
-    pypandoc.convert('content/' + url + '.md', 'pdf', outputfile="wiki/web/PDF/" + url + ".pdf",
-                 extra_args=['-V', 'geometry:margin=1.5cm'])
+def check():
+    print("check")
+
+# 'content/' + url + '.md'
+# wiki/web/PDF/" + url + ".pdf"
+
+def send_email(url, output, email_addresses):
+    pypandoc.convert(url, 'pdf', outputfile=output,
+                     extra_args=['-V', 'geometry:margin=1.5cm'])
     username = 'updatewpy@gmail.com'
     password = 'pass1pass1234'
     to = 'arnzent1@mymail.nku.edu'
@@ -25,12 +31,11 @@ def send_email(url, email_addresses):
 
     body_send = MIMEText(body, 'plain')
     message.attach(body_send)
-    filename = "wiki/web/PDF/" + url + ".pdf"
 
     element = MIMEBase('application', "octet-stream")
-    element.set_payload(open(filename, "rb").read())
+    element.set_payload(open(url, "rb").read())
     encoders.encode_base64(element)
-    element.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(filename))
+    element.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(url))
     message.attach(element)
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
